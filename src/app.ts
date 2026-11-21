@@ -1,6 +1,9 @@
 import "dotenv/config";
 import cors from "cors";
 import express, { type NextFunction, type Request, type Response } from "express";
+import adminServicesRouter from "./routes/adminServices";
+import servicesRouter from "./routes/services";
+import uploadRouter from "./routes/upload";
 
 const app = express();
 
@@ -14,6 +17,9 @@ app.get("/", (_req, res) => {
   res.json({ message: "SalonBook API running" });
 });
 
+app.use("/api/services", servicesRouter);
+app.use("/api/admin/services", adminServicesRouter);
+app.use("/api/admin/upload", uploadRouter);
 // ROUTES_HERE
 
 app.use((_req, res) => {
